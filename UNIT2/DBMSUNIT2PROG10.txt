@@ -1,0 +1,18 @@
+DECLARE
+    CURSOR c_emp IS
+        SELECT EID, EName, Deptname, BasicSal
+        FROM EMP
+        ORDER BY BasicSal DESC;
+
+BEGIN
+    FOR emp_rec IN c_emp
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(
+            emp_rec.EID || ' ' ||
+            emp_rec.EName || ' ' ||
+            emp_rec.Deptname || ' ' ||
+            emp_rec.BasicSal
+        );
+    END LOOP;
+END;
+/

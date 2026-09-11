@@ -1,0 +1,11 @@
+DECLARE
+    celsius NUMBER;
+    fahrenheit NUMBER;
+BEGIN
+    celsius := &celsius;
+
+    fahrenheit := (celsius * 9 / 5) + 32;
+
+    DBMS_OUTPUT.PUT_LINE('Fahrenheit = ' || fahrenheit);
+END;
+/

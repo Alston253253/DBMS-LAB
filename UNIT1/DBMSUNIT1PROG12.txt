@@ -1,0 +1,17 @@
+DECLARE
+    eid NUMBER;
+BEGIN
+    eid := &eid;
+
+    DELETE FROM EMP
+    WHERE EID = eid;
+
+    IF SQL%ROWCOUNT > 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Employee deleted successfully');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Employee not found');
+    END IF;
+
+    COMMIT;
+END;
+/

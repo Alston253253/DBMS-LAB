@@ -1,0 +1,22 @@
+DECLARE
+    v_deptno NUMBER := 20;
+BEGIN
+    UPDATE EMP
+    SET BasicSal = BasicSal * 1.05
+    WHERE Deptno = v_deptno;
+
+    IF SQL%NOTFOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No employees found in department ' || v_deptno);
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Salary updated successfully.');
+    END IF;
+
+    IF SQL%ISOPEN THEN
+        DBMS_OUTPUT.PUT_LINE('Cursor is open.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Cursor is closed.');
+    END IF;
+
+    COMMIT;
+END;
+/

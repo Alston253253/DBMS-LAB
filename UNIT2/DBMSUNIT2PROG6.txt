@@ -1,0 +1,39 @@
+DECLARE
+    CURSOR c_emp(p_deptno NUMBER) IS
+        SELECT EName, BasicSal
+        FROM EMP
+        WHERE Deptno = p_deptno;
+
+    v_deptno NUMBER;
+    v_total NUMBER;
+BEGIN
+    FOR dept_rec IN (
+        SELECT DISTINCT Deptno
+        FROM EMP
+        ORDER BY Deptno
+    )
+    LOOP
+        v_total := 0;
+
+        DBMS_OUTPUT.PUT_LINE('Department: ' || dept_rec.Deptno);
+
+        FOR emp_rec IN c_emp(dept_rec.Deptno)
+        LOOP
+            DBMS_OUTPUT.PUT_LINE(
+                emp_rec.EName || ' Basic Salary: ' || emp_rec.BasicSal
+            );
+
+            v_total := v_total +
+                emp_rec.BasicSal +
+                (emp_rec.BasicSal * 0.50) +
+                (emp_rec.BasicSal * 0.15) +
+                500 -
+                (emp_rec.BasicSal * 0.10);
+        END LOOP;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Department Total Gross Salary: ' || v_total
+        );
+    END LOOP;
+END;
+/

@@ -1,0 +1,26 @@
+DECLARE
+    product_name VARCHAR2(50);
+    qty NUMBER;
+    price NUMBER;
+    discount_percent NUMBER;
+    amount NUMBER;
+    discount NUMBER;
+    net_amount NUMBER;
+BEGIN
+    product_name := '&product_name';
+    qty := &quantity;
+    price := &price;
+    discount_percent := &discount_percent;
+
+    amount := qty * price;
+    discount := amount * discount_percent / 100;
+    net_amount := amount - discount;
+
+    DBMS_OUTPUT.PUT_LINE('Product Name = ' || product_name);
+    DBMS_OUTPUT.PUT_LINE('Quantity = ' || qty);
+    DBMS_OUTPUT.PUT_LINE('Price = ' || price);
+    DBMS_OUTPUT.PUT_LINE('Total Amount = ' || amount);
+    DBMS_OUTPUT.PUT_LINE('Discount = Rs. ' || discount);
+    DBMS_OUTPUT.PUT_LINE('Net Amount = Rs. ' || net_amount);
+END;
+/

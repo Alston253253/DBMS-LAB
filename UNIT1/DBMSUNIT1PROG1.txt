@@ -1,0 +1,15 @@
+DECLARE
+    p NUMBER;
+    r NUMBER;
+    n NUMBER;
+    si NUMBER;
+BEGIN
+    p := &principal;
+    r := &rate;
+    n := &years;
+
+    si := (p * r * n) / 100;
+
+    DBMS_OUTPUT.PUT_LINE('Simple Interest = ' || si);
+END;
+/

@@ -1,0 +1,16 @@
+DECLARE
+    v_deptno NUMBER := 10;
+BEGIN
+    UPDATE EMP
+    SET BasicSal = BasicSal * 1.10
+    WHERE Deptno = v_deptno;
+
+    IF SQL%ROWCOUNT > 0 THEN
+        DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT || ' employee(s) salary updated.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('No employees found in department ' || v_deptno);
+    END IF;
+
+    COMMIT;
+END;
+/

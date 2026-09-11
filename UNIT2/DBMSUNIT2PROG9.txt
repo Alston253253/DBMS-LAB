@@ -1,0 +1,17 @@
+DECLARE
+BEGIN
+    FOR emp_rec IN (
+        SELECT EID, EName, Deptname, BasicSal
+        FROM EMP
+        WHERE EName LIKE 'A%'
+    )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(
+            emp_rec.EID || ' ' ||
+            emp_rec.EName || ' ' ||
+            emp_rec.Deptname || ' ' ||
+            emp_rec.BasicSal
+        );
+    END LOOP;
+END;
+/

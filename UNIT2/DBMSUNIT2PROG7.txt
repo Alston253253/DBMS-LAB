@@ -1,0 +1,41 @@
+DECLARE
+    CURSOR c_emp(p_deptno NUMBER) IS
+        SELECT *
+        FROM EMP
+        WHERE Deptno = p_deptno;
+
+    v_deptno NUMBER;
+    v_count NUMBER := 0;
+
+    NO_DEPT_FOUND EXCEPTION;
+BEGIN
+    v_deptno := &deptno;
+
+    FOR emp_rec IN c_emp(v_deptno)
+    LOOP
+        INSERT INTO EMP_BACKUP
+        VALUES (
+            emp_rec.EID,
+            emp_rec.EName,
+            emp_rec.Deptno,
+            emp_rec.Deptname,
+            emp_rec.Gender,
+            emp_rec.Age,
+            emp_rec.BasicSal
+        );
+
+        v_count := v_count + 1;
+    END LOOP;
+
+    IF v_count = 0 THEN
+        RAISE NO_DEPT_FOUND;
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE(v_count || ' record(s) inserted.');
+    COMMIT;
+
+EXCEPTION
+    WHEN NO_DEPT_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No department found.');
+END;
+/

@@ -1,0 +1,21 @@
+DECLARE
+    CURSOR c1 IS
+        SELECT EID, EName, Deptno, Deptname, Gender, Age, BasicSal
+        FROM EMP
+        WHERE Gender = 'Male'
+        AND Deptname = 'HR';
+BEGIN
+    FOR emp_rec IN c1
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(
+            emp_rec.EID || ' ' ||
+            emp_rec.EName || ' ' ||
+            emp_rec.Deptno || ' ' ||
+            emp_rec.Deptname || ' ' ||
+            emp_rec.Gender || ' ' ||
+            emp_rec.Age || ' ' ||
+            emp_rec.BasicSal
+        );
+    END LOOP;
+END;
+/
